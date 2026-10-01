@@ -1,1 +1,82 @@
-A Little Game for You 🎁
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terima Kemaafan Dari Abang?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Skrin Utama Proposal -->
+  <div id="proposal-screen" class="container">
+    <video id="gif-header" autoplay loop muted playsinline width="300">
+  <source src="cute.mp4" type="video/mp4">
+</video>
+    <h1 id="question">Sudi Terima Kemaafan Dari Abang? ❤️</h1>
+    
+    <div class="buttons">
+      <button id="yes-btn" onclick="acceptProposal()">YES</button>
+      <button id="no-btn" onclick="handleNoClick()">NO</button>
+    </div>
+  </div>
+
+ <!-- Skrin Hadiah / Kejutan (Muncul selepas klik YES) -->
+    <div id="gift-screen" class="container hidden">
+      <h1>Abang Tahu Sayang Akan Pilih Yes 💕</h1>
+      <img src="happy.gif" alt="Happy GIF" class="gift-header-img">
+      
+      <div id="gifts-container">
+        <h2>Yay! Pilih Hadiah 🎁</h2>
+        <p style="font-weight: bold; color: #ff4d6d; margin-top: 10px;">Sila Tekan Hadiah</p>
+        
+        <div class="gifts-grid">
+          <div class="gift-card" onclick="showSection('memories')">
+            <img src="gift1.gif" alt="Gift 1" class="gift-icon">
+          </div>
+          <div class="gift-card" onclick="showSection('music')">
+            <img src="gift2.gif" alt="Gift 2" class="gift-icon">
+          </div>
+          <div class="gift-card" onclick="showSection('letter')">
+            <img src="gift3.gif" alt="Gift 3" class="gift-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Kandungan Hadiah 1: Memori / Gambar -->
+  <div id="memories" class="modal hidden">
+    <h2>Kesayangan Abang📸</h2>
+    <div class="photo-gallery">
+      <img src="gambar1.jpg" alt="Memory 1">
+      <img src="gambar2.jpg" alt="Memory 2">
+      <img src="gambar3.jpg" alt="Memory 2">
+    </div>
+    <button onclick="closeModal('memories')">Go back</button>
+  </div>
+
+  <!-- Kandungan Hadiah 2: Lagu -->
+  <div id="music" class="modal hidden">
+    <h2>Abang Tidak Rela Kehilangan🎶</h2>
+    <!-- Tambah GIF/Gambar di sini -->
+  <img src="lagu.gif" alt="Music GIF" style="max-width: 250px; width: 100%; border-radius: 12px; margin-bottom: 15px;">
+   <audio controls autoplay loop>
+  <source src="sayang.mp3" type="audio/mpeg">
+  Pelayar anda tidak menyokong elemen audio.
+</audio>
+    <br><br>
+    <button onclick="closeModal('music')">Back</button>
+  </div>
+
+  <!-- Kandungan Hadiah 3: Surat Cinta -->
+  <div id="letter" class="modal hidden">
+    <div class="letter-card">
+      <h2>Kesayangan Abang💌</h2>
+      <p>Abang tahu abang banyak salah maafkan lah abang, berilah peluang kepada abang, abang tak sanggup kehilangan kesayang abang</p>
+    </div>
+    <button onclick="closeModal('letter')">Back</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
