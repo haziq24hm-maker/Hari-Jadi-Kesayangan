@@ -1,118 +1,19 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-body {
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #000; }
 
-.card-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    width: 340px;
-    text-align: center;
-}
+#bodyblur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+#wallpaper { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
 
-h2 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-}
+#Content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 
-.subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    color: #ddd;
-}
+#envelope { position: relative; width: 260px; height: 180px; background: #ff758c; border-radius: 10px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.5s; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; }
 
-.memory-game {
-    width: 290px;
-    height: 380px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 12px;
-    perspective: 1000px;
-}
+#envelope-letter { background: white; color: #333; width: 230px; padding: 15px; border-radius: 8px; font-size: 0.85rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-.memory-card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform: scale(1);
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border-radius: 12px;
-}
+button { background: #ff4d6d; color: white; border: none; padding: 12px 25px; font-size: 1rem; font-weight: 600; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); transition: 0.2s; }
+button:active { transform: scale(0.95); }
 
-.memory-card:active {
-    transform: scale(0.97);
-}
-
-.memory-card.flip {
-    transform: rotateY(180deg);
-}
-
-.front-face, .back-face {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 12px;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.front-face {
-    background: #ffffff;
-    font-size: 2rem;
-    transform: rotateY(180deg);
-}
-
-.back-face {
-    background: rgba(255, 255, 255, 0.25);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-}
-
-#success-message {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(46, 204, 113, 0.3);
-    border: 1px solid #2ecc71;
-    border-radius: 10px;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-#success-message.hidden {
-    display: none;
-}
-
-#success-message h3 {
-    font-size: 1.1rem;
-    color: #2ecc71;
-    margin-bottom: 5px;
-}
-
-#success-message p {
-    font-size: 0.85rem;
-    color: #fff;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+#welc { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.2rem; cursor: pointer; }
+.hidden { display: none !important; }
