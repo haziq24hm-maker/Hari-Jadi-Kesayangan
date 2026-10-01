@@ -1,78 +1,52 @@
-const cards = document.querySelectorAll('.memory-card');
-const successMessage = document.getElementById('success-message');
+let noCount = 0;
+let yesSize = 18; // saiz font asal butang YES
 
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
-let matchedPairs = 0;
-// Jumlah pasangan sebenar (4 pasangan, kad ke-9 adalah kad bonus/tunggal)
-const totalPairs = 4; 
+const phrases = [
+  "Wait... are you sure? 🥺",
+  "nah that's not right... 😭",
+  "try again 🥺",
+  "be serious... 💔",
+  "okay now you're just playing...",
+  "okay last chance..."
+];
 
-function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+function handleNoClick() {
+  const noBtn = document.getElementById("no-btn");
+  const yesBtn = document.getElementById("yes-btn");
+  const question = document.getElementById("question");
 
-    this.classList.add('flip');
+  // Tukar teks soalan
+  if (noCount < phrases.length) {
+    question.innerText = phrases[noCount];
+  } else {
+    question.innerText = phrases[phrases.length - 1];
+  }
 
-    if (!hasFlippedCard) {
-        hasFlippedCard = true;
-        firstCard = this;
-        return;
-    }
+  // Besarkan butang YES
+  yesSize += 25;
+  yesBtn.style.fontSize = yesSize + "px";
+  yesBtn.style.padding = (12 + noCount * 5) + "px " + (25 + noCount * 10) + "px";
 
-    secondCard = this;
-    checkForMatch();
+  noCount++;
 }
 
-function checkForMatch() {
-    // Elakkan kad tunggal (bintang) daripada dikira sebagai padanan biasa
-    if (!firstCard.dataset.framework || !secondCard.dataset.framework) {
-        resetBoard();
-        return;
-    }
-
-    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-    isMatch ? disableCards() : unflipCards();
+function acceptProposal() {
+  document.getElementById("proposal-screen").classList.add("hidden");
+  document.getElementById("gift-screen").classList.remove("hidden");
 }
 
-function disableCards() {
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
-
-    matchedPairs++;
+function showSection(id) {
+    // Sembunyikan skrin gift apabila mana-mana cadangan gift ditekan
+    document.getElementById("gift-screen").classList.add("hidden");
     
-    if (matchedPairs === totalPairs) {
-        setTimeout(() => {
-            successMessage.classList.remove('hidden');
-        }, 500);
-    }
-
-    resetBoard();
+    // Tunjukkan modal/section yang ditekan
+    document.getElementById(id).classList.remove("hidden");
 }
 
-function unflipCards() {
-    lockBoard = true;
-
-    setTimeout(() => {
-        firstCard.classList.remove('flip');
-        secondCard.classList.remove('flip');
-
-        resetBoard();
-    }, 900);
+function closeModal(id) {
+    // Sembunyikan modal semasa
+    document.getElementById(id).classList.add("hidden");
+    
+    // Tunjukkan semula skrin gift
+    document.getElementById("gift-screen").classList.remove("hidden");
 }
-
-function resetBoard() {
-    [hasFlippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
-}
-
-// Rawak kedudukan susunan grid setiap kali dibuka
-(function shuffle() {
-    cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 9);
-        card.style.order = randomPos;
-    });
-})();
-
-cards.forEach(card => card.addEventListener('click', flipCard));
