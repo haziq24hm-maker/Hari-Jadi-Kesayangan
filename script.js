@@ -5,7 +5,8 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let matchedPairs = 0;
-const totalPairs = cards.length / 2;
+// Jumlah pasangan sebenar (4 pasangan, kad ke-9 adalah kad bonus/tunggal)
+const totalPairs = 4; 
 
 function flipCard() {
     if (lockBoard) return;
@@ -24,6 +25,12 @@ function flipCard() {
 }
 
 function checkForMatch() {
+    // Elakkan kad tunggal (bintang) daripada dikira sebagai padanan biasa
+    if (!firstCard.dataset.framework || !secondCard.dataset.framework) {
+        resetBoard();
+        return;
+    }
+
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
     isMatch ? disableCards() : unflipCards();
@@ -35,7 +42,6 @@ function disableCards() {
 
     matchedPairs++;
     
-    // Semak jika semua kad sudah habis dipadankan
     if (matchedPairs === totalPairs) {
         setTimeout(() => {
             successMessage.classList.remove('hidden');
@@ -53,7 +59,7 @@ function unflipCards() {
         secondCard.classList.remove('flip');
 
         resetBoard();
-    }, 1000);
+    }, 900);
 }
 
 function resetBoard() {
@@ -61,10 +67,10 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
-// Fungsi rawak kedudukan kad setiap kali laman dimuatkan
+// Rawak kedudukan susunan grid setiap kali dibuka
 (function shuffle() {
     cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 8);
+        let randomPos = Math.floor(Math.random() * 9);
         card.style.order = randomPos;
     });
 })();
