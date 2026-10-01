@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.card-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    width: 340px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.memory-game {
+    width: 290px;
+    height: 380px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 12px;
+    perspective: 1000px;
+}
+
+.memory-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 12px;
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face, .back-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 12px;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front-face {
+    background: #ffffff;
+    font-size: 2rem;
+    transform: rotateY(180deg);
+}
+
+.back-face {
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+#success-message {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(46, 204, 113, 0.3);
+    border: 1px solid #2ecc71;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#success-message.hidden {
+    display: none;
+}
+
+#success-message h3 {
+    font-size: 1.1rem;
+    color: #2ecc71;
+    margin-bottom: 5px;
+}
+
+#success-message p {
+    font-size: 0.85rem;
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
